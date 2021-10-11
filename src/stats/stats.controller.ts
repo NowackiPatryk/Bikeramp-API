@@ -48,18 +48,22 @@ export class StatsController {
     const stats: AverageDayStatsInterface[] = [];
 
     Object.keys(grouped).forEach((key) => {
-      const nrOfElements = grouped[key].length;
+      let totalDistance = 0;
+      let avgRide = 0;
+      let avgPrice = 0;
+
+      grouped[key].forEach((trip, index, arr) => {
+        console.log(trip);
+        totalDistance += trip.distance;
+        avgRide += trip.distance / arr.length;
+        avgPrice += trip.price / arr.length;
+      });
 
       stats.push({
         day: getSimpleDate(key),
-        ...grouped[key].reduce((prev, current) => {
-
-          return {
-            total_distance: (prev.distance + current.distance).toFixed(2) + 'KM',
-            avg_ride: (prev.distance + current.distance).toFixed(2) / nrOfElements + 'KM',
-            avg_price: (prev.price + current.price).toFixed(2) / nrOfElements + 'PLN',
-          };
-        }),
+        total_distance: totalDistance.toFixed(2) + 'KM',
+        avg_ride: avgRide.toFixed(2) + 'KM',
+        avg_price: avgPrice.toFixed(2) + 'PLN',
       });
     });
 
