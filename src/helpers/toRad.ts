@@ -1,1 +1,1 @@
-export default (value: number) => value * Math.PI / 180;
+export default (value: number): number => value * Math.PI / 180;
