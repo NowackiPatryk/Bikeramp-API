@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Query, Req } from '@nestjs/common';
 import { LocationNotFoundException } from 'src/location/exceptions/LocationNotFound.exception';
 import { LocationService } from 'src/location/location.service';
 import { CreateTripDto } from './dto/CreateTrip.dto';
 import { CreateTripRequestDto } from './dto/CreateTripRequest.dto';
 import { TripService } from './trip.service';
+import { SearchTripsDto } from './dto/SearchTrips.dto';
 
 @Controller('trip')
 export class TripController {
@@ -13,8 +14,8 @@ export class TripController {
   ) {}
 
   @Get('/')
-  async findAll() {
-    return this.tripService.findAll();
+  async findAll(@Query() params: SearchTripsDto) {
+    return this.tripService.findAll(params);
   }
 
   @Get('/:id')
