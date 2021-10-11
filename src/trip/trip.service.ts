@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository } from 'typeorm';
+import { Between, DeleteResult, Repository } from 'typeorm';
 import { CreateTripDto } from './dto/CreateTrip.dto';
 import { Trip } from './trip.entity';
 
@@ -13,6 +13,20 @@ export class TripService {
 
   async findAll(): Promise<Trip[]> {
     return this.tripRepository.find();
+  }
+
+  async findAllInDateRange(
+    beginingDate: number,
+    endingDate: number,
+  ): Promise<Trip[]> {
+    return this.tripRepository.find({
+      where: {
+        date: Between(
+          new Date(beginingDate).toISOString(),
+          new Date(endingDate).toISOString(),
+        ),
+      },
+    });
   }
 
   async findOneById(id: number): Promise<Trip> {

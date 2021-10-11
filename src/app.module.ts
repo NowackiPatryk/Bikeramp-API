@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TripModule } from './trip/trip.module';
 import { LocationModule } from './location/location.module';
+import { StatsModule } from './stats/stats.module';
 import Config from './config';
 
 @Module({
@@ -16,6 +17,7 @@ import Config from './config';
     }),
     TripModule,
     LocationModule,
+    StatsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

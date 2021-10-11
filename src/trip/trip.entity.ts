@@ -27,8 +27,8 @@ export class Trip {
   price: number;
 
   @CreateDateColumn({
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP(6)',
+    type: 'date',
+    default: () => 'CURRENT_TIMESTAMP(1)',
   })
   date: Date;
 }
