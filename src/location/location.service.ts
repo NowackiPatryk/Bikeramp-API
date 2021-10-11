@@ -11,7 +11,7 @@ export class LocationService {
   ) {}
 
   async getLocationData(query: string): Promise<any> {
-    const decodedQuery = query.split(','); //  [0] is street, [1] is city, [2] is county
+    const decodedQuery = query.split(','); //  [0] is street, [1] is city, [2] is countrty
     const params = {
       street: decodedQuery[0],
       city: decodedQuery[1],
