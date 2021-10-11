@@ -1,4 +1,4 @@
-export const getDaysInCurrentMonth = () => {
+export const getDaysInCurrentMonth = (): number => {
   const today = new Date();
   const month = today.getMonth();
 
