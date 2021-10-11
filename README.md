@@ -1,30 +1,66 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
+## What is this app? 
+This is api that helps bike couriers track their deliveries and check weekly and monthly stats about them.
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+# API Docs
+**GET /api/trip** <br/><br/>
+returns list of trips in following format: <br/><br/>
+**id**: number | id of delievery<br/>
+**start_address**: string | (for example: 'Plac Europejski 2, Warszawa, Polska') - address where courier starts delivery<br/>
+**destination_address**: string | (for example: 'Plac Europejski 2, Warszawa, Polska') - address where courier ends delivery<br/>
+**distance**: number | distance between start_address and destination_address in KM<br/>
+**price**: number | value of delivery in PLN<br/>
+**date**: string | yyyy-mm-dd format<br/>
+<br/>
+Query params: <br/><br/>
+**start_address** in format 'Plac Europejski 2, Warszawa, Polska'<br/>
+**destination_address** in format 'Plac Europejski 2, Warszawa, Polska'<br/>
+**price**: number<br/>
+**date**: string in yyyy-mm-dd format<br/>
+<br/>
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+**POST /api/trip** <br/><br/>
+Creates new trip in database <br/><br/>
+Required body parameters: <br/>
+* start_address<br/>
+* destination_address<br/>
+* price<br/>
+<br/>
 
-## Description
+**GET /api/stats/weekly** <br/><br/>
+returns weekly stats about deliveries.<br/>
+Example reponse: <br/>
+<pre>
+{
+  "total_distance": "40km",
+  "total_price":    "49.75PLN"
+} 
+</pre>
+<br/>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+**GET /api/stats/monthly** <br/><br/>
+returns monthly stats about deliveries from each day.<br/>
+Example reponse: <br/>
+<pre>
+[
+  {
+    "day": "July, 4th",
+    "total_distance": "12km",
+    "avg_ride": "4km",
+    "avg_price": "22.75PLN"
+  },
+  {
+    "day": "July, 5th",
+    "total_distance": "3km",
+    "avg_ride": "3km",
+    "avg_price": "15.50PLN"
+  }
+]
+</pre>
+<br/>
+
+## Imporant
+Remember about filling .env with your own data following .env.example pattern. 
+API uses Nominatim API which can be found in this link: https://nominatim.org/release-docs/develop/api/Overview/
 
 ## Installation
 
